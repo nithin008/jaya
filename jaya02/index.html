@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<meta name='robots' content='max-image-preview:large' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v14.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Token authentication requirements for Git operations | The GitHub Blog</title>
+	<meta name="description" content="Beginning August 13th, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com." />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Token authentication requirements for Git operations | The GitHub Blog" />
+	<meta property="og:description" content="Beginning August 13th, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com." />
+	<meta property="og:url" content="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/" />
+	<meta property="og:site_name" content="The GitHub Blog" />
+	<meta property="article:publisher" content="https://www.facebook.com/GitHub" />
+	<meta property="article:published_time" content="2020-12-15T20:28:51+00:00" />
+	<meta property="article:modified_time" content="2021-08-17T22:45:34+00:00" />
+	<meta property="og:image" content="https://github.blog/wp-content/uploads/2019/09/security-1200-630.png?fit=1200%2C630" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://github.blog/wp-content/uploads/2019/09/security-1200-630.png?fit=1200%2C630" />
+	<meta name="twitter:creator" content="@github" />
+	<meta name="twitter:site" content="@github" />
+<script type='application/ld+json'>{"headline":"Token authentication requirements for Git operations","@context":"http:\/\/schema.org","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/github.blog\/2020-12-15-token-authentication-requirements-for-git-operations\/"},"dateModified":"2021-08-17T15:45:34-07:00","datePublished":"2020-12-15T12:28:51-08:00","@type":"BlogPosting","description":"In July 2020, we announced our intent to require the use of token-based authentication (for example, a personal access, OAuth, or GitHub App installation token) for all authenticated Git operations. Beginning August 13, 2021, we","author":{"@type":"Person","name":"Matthew Langlois"},"image":"https:\/\/github.blog\/wp-content\/uploads\/2019\/09\/security-2016-1204.png?resize=150%2C150"}</script>
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://github.blog/#organization","name":"GitHub","url":"https://github.blog/","sameAs":["https://www.facebook.com/GitHub","https://www.instagram.com/github/","https://www.linkedin.com/company/github/","https://www.youtube.com/GitHub","https://twitter.com/github"],"logo":{"@type":"ImageObject","@id":"https://github.blog/#logo","inLanguage":"en-US","url":"https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=512%2C512","width":512,"height":512,"caption":"GitHub"},"image":{"@id":"https://github.blog/#logo"}},{"@type":"WebSite","@id":"https://github.blog/#website","url":"https://github.blog/","name":"The GitHub Blog","description":"Updates, ideas, and inspiration from GitHub to help developers build and design software.","publisher":{"@id":"https://github.blog/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://github.blog/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/#webpage","url":"https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/","name":"Token authentication requirements for Git operations | The GitHub Blog","isPartOf":{"@id":"https://github.blog/#website"},"datePublished":"2020-12-15T20:28:51+00:00","dateModified":"2021-08-17T22:45:34+00:00","description":"Beginning August 13th, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/"]}]},{"@type":"Article","@id":"https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/#article","isPartOf":{"@id":"https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/#webpage"},"author":{"@id":"https://github.blog/#/schema/person/59e40f1d111946f6bd172c06412391f4"},"headline":"Token authentication requirements for Git operations","datePublished":"2020-12-15T20:28:51+00:00","dateModified":"2021-08-17T22:45:34+00:00","commentCount":0,"mainEntityOfPage":{"@id":"https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/#webpage"},"publisher":{"@id":"https://github.blog/#organization"},"keywords":"authentication,Git,token authentication","articleSection":"Security","inLanguage":"en-US"},{"@type":["Person"],"@id":"https://github.blog/#/schema/person/59e40f1d111946f6bd172c06412391f4","name":"Matthew Langlois","image":{"@type":"ImageObject","@id":"https://github.blog/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/1d2be84ad75616c37d456549d2eafa1c?s=96&d=mm&r=g","caption":"Matthew Langlois"}}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel="alternate" type="application/rss+xml" title="The GitHub Blog &raquo; Feed" href="https://github.blog/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/github.blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.7.2"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='all-css-0' href='https://github.blog/_static/??-eJyNkMsOwiAQRX9IOq2PJi6M30JhQtGBEhg0/L1Uu6jppss7957kZOAdhPWKssYEKiXQNjEMNKmnIDtEGQskLoSNs76pgwOsiUcCh9pKJHTo+S8EkgWjIDRSlX147db5D1KT53nDY+0SGMtjHkQ1NT/nWX5ruod6oddTXLoN6bIIlI31VRc5yPqYrm3aL7kcZububl1/vHbnS9+ePoehfnY=' type='text/css' media='all' />
+<style id='wp-block-library-inline-css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<script type='text/javascript' src='https://github.blog/wp-content/themes/github-blog/dist/js/vendor/gascrolldepth.min.js?m=1626887508g'></script>
+<link rel="https://api.w.org/" href="https://github.blog/wp-json/" /><link rel="alternate" type="application/json" href="https://github.blog/wp-json/wp/v2/posts/55352" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://github.blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://github.blog/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.7.2" />
+<link rel='shortlink' href='https://wp.me/pamS32-eoM' />
+<link rel="alternate" type="application/json+oembed" href="https://github.blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgithub.blog%2F2020-12-15-token-authentication-requirements-for-git-operations%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://github.blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgithub.blog%2F2020-12-15-token-authentication-requirements-for-git-operations%2F&#038;format=xml" />
+<style type='text/css'>img#wpstats{display:none}</style>
+		<link rel="icon" href="https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=32%2C32" sizes="32x32" />
+<link rel="icon" href="https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=192%2C192" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=180%2C180" />
+<meta name="msapplication-TileImage" content="https://github.blog/wp-content/uploads/2019/01/cropped-github-favicon-512.png?fit=270%2C270" />
+			<style type="text/css" id="wp-custom-css">
+				ol [href*=uncategorized] {
+	display: none;
+}
+
+.featured-post {
+	z-index: 0 !important;
+}
+
+span.vr {
+	display: none !important;
+}
+
+a.btn-sponsors {
+	font-size: 16px !important;
+	padding: 10px 14px !important;
+	margin-top: 10px;
+	background-color: #0366d6 !important;
+	color: #fff;
+}
+
+.btn-sponsors:hover {
+	background-color: #fff !important;
+	color: #0366d6 !important;
+}
+
+.microcopy-sponsors {
+	font-weight: 400 !important;
+	margin-top: 1px !important;
+	margin-bottom: 20px !important;
+	text-align: center !important;
+}
+
+.code-none span {
+	color: #333 !important;
+	font-weight: normal !important;
+}
+
+.code-highlight {
+	background: yellow !important;
+}
+
+.universe-compact-list {
+	padding-left: 0 !important;
+}
+
+.universe-compact-list li {
+	display: inline-block;
+	border: 1px solid #dfe2e5;
+	border-radius: 3px;
+	padding: 7px 10px;
+	font-size: 13px;
+	margin-bottom: .4em;
+	background-color: #fafbfc;
+}
+
+#ul-columns {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}			</style>
+		
+				<script>
+		// remove no-js and add js to the HTML (do it the cross-brower way)
+		document.documentElement.className = document.documentElement.className.replace('no-js', ' ');
+		document.documentElement.className += ' js ';
+
+		// Webfont loader
+		WebFontConfig = {
+			google: { families: [ 'Roboto+Mono:400,700' ] }
+		};
+
+		(function() {
+			var wf = document.createElement('script');
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+				'://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.type = 'text/javascript';
+			wf.async = 'true';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(wf, s);
+		})();
+		</script>
+		<meta name="octolytics-host" content="collector.githubapp.com">
+<meta name="octolytics-app" content="github-blog">
+	</head>
+
+	<body class="post-template-default single single-post postid-55352 single-format-standard">
+
+		
+		
+<div class="top-bar bg-gray-dark px-3">
+	<div class="top-bar__container container-xl d-flex flex-row flex-items-center">
+
+		<a href="https://github.com/" class="text-white f6">
+			Back to GitHub.com		</a>
+
+	</div>
+</div>
+
+		<header class="site-header px-3" role="banner">
+
+			<div class="container-xl d-flex flex-row py-3">
+
+				<div class="d-flex flex-items-center col-6 col-md-4">
+					
+<a href="https://github.blog/" class="site-branding d-flex" aria-label="The GitHub Blog">
+	<svg role="img" height="28" width="28" class="icon-mark-github icon" aria-label="github-logo"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-mark-github"/></svg>	<h1 class="site-branding__title h4 text-normal pl-3 mt-1 alt-mono-font">
+		The GitHub Blog	</h1>
+</a>
+				</div>
+
+				<div class="header-right d-flex col-6 col-md-8 flex-justify-end">
+					
+<div class="d-none d-lg-flex flex-items-center flex-justify-between">
+	<nav id="js-primary-nav" class="primary-nav" aria-label="Primary">
+
+		<ul id="menu-primary-navigation" class="primary-nav__menu d-flex flex-self-center flex-shrink-0 text-white"><li id="menu-item-58161" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-58161"><a href="https://github.blog/">Blog Categories</a>
+<ul class="sub-menu">
+	<li id="menu-item-58164" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58164"><a href="https://github.blog/category/community/">Community</a></li>
+	<li id="menu-item-58165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58165"><a href="https://github.blog/category/company/">Company</a></li>
+	<li id="menu-item-58168" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58168"><a href="https://github.blog/category/education/">Education</a></li>
+	<li id="menu-item-58167" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58167"><a href="https://github.blog/category/engineering/">Engineering</a></li>
+	<li id="menu-item-58169" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58169"><a href="https://github.blog/category/enterprise/">Enterprise</a></li>
+	<li id="menu-item-58170" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58170"><a href="https://github.blog/category/open-source/">Open Source</a></li>
+	<li id="menu-item-58171" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58171"><a href="https://github.blog/category/policy/">Policy</a></li>
+	<li id="menu-item-58172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58172"><a href="https://github.blog/category/product/">Product</a></li>
+	<li id="menu-item-58173" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58173"><a href="https://github.blog/category/security/">Security</a></li>
+</ul>
+</li>
+<li id="menu-item-46666" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46666"><a href="https://github.blog/changelog/">Changelog</a></li>
+</ul>
+	</nav>
+
+	<div class="header-search__toggle-container d-flex flex-self-auto flex-justify-end mx-3">
+		<button type="button"
+				aria-expanded="false"
+				aria-controls="js-header-search"
+				aria-haspopup="true"
+				class="header-search__toggle btn btn-outline btn-link anim-fade-in fast px-2"
+				id="js-search-toggle">
+			<svg role="img" height="16" width="16" class="icon-search icon" aria-label="search"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-search"/></svg>		</button>
+	</div>
+</div>
+
+					<div id="js-header-search" class="header-search d-none col-6 box-shadow-large p-3" aria-hidden="true">
+	<form role="search" method="get" class="header-search__form col-12" action="https://github.blog">
+		<label class="search-form__label screen-reader-text" for="search-input">Search by Keyword</label>
+
+		<div class="header-search__form-fields d-flex flex-row flex-items-center">
+			<input type="search" class="search-field form-control flex-auto p-2 mr-2" placeholder="Search …" value="" name="s" id="search-input">
+
+			<div class="site-search__submit ml-2">
+				<button type="submit" class="btn btn-outline px-4 py-2 search-submit">
+					Search
+					<svg role="img" height="12" width="12" class="icon-arrow-skinny-right icon" aria-label="arrow-skinny-right"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-arrow-skinny-right"/></svg>				</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+					<button class="mobile-nav-toggle d-lg-none btn border-0 px-2"
+							id="js-mobile-nav-toggle"
+							aria-controls="js-mobile-nav"
+							aria-expanded="false">
+						<span class="screen-reader-text">
+							Primary Menu						</span>
+						<div class="burger-menu">
+							<div class="burger"></div>
+						</div>
+					</button>
+
+				</div>
+			</div>
+
+			
+<nav id="js-mobile-nav" class="mobile-nav d-none d-flex flex-column col-12" role="navigation" aria-label="Mobile">
+	<ul id="menu-primary-navigation-1" class="primary-nav__menu col-12 px-3 d-flex flex-column text-white"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-58161"><a href="https://github.blog/">Blog Categories</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58164"><a href="https://github.blog/category/community/">Community</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58165"><a href="https://github.blog/category/company/">Company</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58168"><a href="https://github.blog/category/education/">Education</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58167"><a href="https://github.blog/category/engineering/">Engineering</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58169"><a href="https://github.blog/category/enterprise/">Enterprise</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58170"><a href="https://github.blog/category/open-source/">Open Source</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58171"><a href="https://github.blog/category/policy/">Policy</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58172"><a href="https://github.blog/category/product/">Product</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58173"><a href="https://github.blog/category/security/">Security</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46666"><a href="https://github.blog/changelog/">Changelog</a></li>
+</ul>
+	<div class="mobile-nav__search col-12 px-3 my-4">
+
+		<form role="search" method="get" class="header-search__form col-12" action="https://github.blog">
+			<label class="search-form__label screen-reader-text" for="mobile-search-input">Search by Keyword</label>
+
+			<div class="d-flex flex-row flex-items-center">
+				<input type="search" class="search-field form-control flex-auto p-2 mr-2" placeholder="Search …" value="" name="s" id="mobile-search-input">
+
+				<div class="site-search__submit ml-2">
+					<button type="submit" class="btn btn-outline px-4 py-2 search-submit">
+						<svg role="img" height="16" width="16" class="icon-search icon" aria-label="search"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-search"/></svg>
+						<div class="screen-reader-text">
+							Search						</div>
+					</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</nav>
+
+		</header><!-- .site-header -->
+
+		<main class="site-main" id="main" role="main">
+
+	<section class="main-post px-3 py-4 pb-md-8">
+
+					
+			<div class="container-md">
+
+				<article id="post-55352" class="col-12 post-55352 post type-post status-publish format-standard hentry category-security tag-authentication tag-git tag-token-authentication">
+
+					
+<div class="post-featured mb-3 mb-md-9 pb-0 pb-md-4 pt-0 pt-md-4 pt-lg-8">
+	</div>
+
+
+					<header class="post__header d-block mb-6">
+
+	<div class="post__header-content">
+		<div class="post__meta d-flex flex-column flex-md-row flex-md-items-center my-3 col-12">
+			<p class="post__date m-0 alt-mono-font f5">
+				<time datetime="2020-12-15" pubdate>
+					December 15, 2020				</time>
+
+			</p>
+							<span class="spacer-line col-1"></span>
+				<div class="post__categories col-12 col-md-6 flex-auto d-flex flex-row flex-wrap alt-mono-font">
+					
+	<li><a href="https://github.blog/category/security/">Security</a></li>				</div>
+					</div>
+
+		<h1 class="post__title my-2 f00-light lh-condensed">
+			Token authentication requirements for Git operations		</h1>
+
+					<a href="https://github.blog/author/fletchto99/" class="author-block d-inline-flex flex-row flex-items-center">
+	<div class="author-block__pic mr-3">
+		<img alt='Image of Matthew Langlois' src='https://avatars3.githubusercontent.com/u/718681?v=4&#038;s=35' srcset='https://avatars3.githubusercontent.com/u/718681?v=4&#038;s=70 2x' class='avatar avatar-35 photo avatar-default' height='35' width='35' itemprop="image" />	</div>
+	<p class="hero-post__author-name f5 m-0">
+		Matthew Langlois	</p>
+</a>
+			</div>
+
+</header>
+
+					
+<div class="post__content markdown-body col-12 col-md-10 mb-2 mb-md-4">
+
+	<p><a href="https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/">In July 2020</a>, we announced our intent to require the use of token-based authentication (for example, a personal access, OAuth, or GitHub App installation token) for all authenticated Git operations. Beginning August 13, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com.</p>
+<h3 id="workflows-affected">Workflows affected<a href="#workflows-affected" class="heading-link" aria-label="Workflows affected" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<ul>
+<li>Command line Git access</li>
+<li>Desktop applications using Git (GitHub Desktop is unaffected)</li>
+<li>Any apps/services that access Git repositories on GitHub.com directly using your password</li>
+</ul>
+<p>The following customers remain unaffected by this change:</p>
+<ul>
+<li>If you have <a href="https://help.github.com/en/github/authenticating-to-github/securing-your-account-with-two-factor-authentication-2fa">two-factor authentication</a> enabled for your account, you are already required to use token- or SSH-based authentication.</li>
+<li>If you use GitHub Enterprise Server, we have not announced any changes to our on-premises offering.</li>
+<li>If you maintain a <a href="https://docs.github.com/en/developers/apps/about-apps#about-github-apps">GitHub App</a>, GitHub Apps do not support password authentication.</li>
+</ul>
+<h3 id="background">Background<a href="#background" class="heading-link" aria-label="Background" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<p>We <a href="https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/#background">described our motivation</a> as we announced similar changes to authenticating with the API as follows:</p>
+<blockquote><p>In recent years, GitHub customers have benefited from a number of security enhancements to GitHub.com, such as <a href="https://github.blog/2013-09-03-two-factor-authentication/">two-factor authentication</a>, <a href="https://github.blog/changelog/2018-11-27-unrecognized-location-sign-in-notifications/">sign-in alerts</a>, <a href="https://github.blog/changelog/2019-07-01-verified-devices/">verified devices</a>, <a href="https://github.blog/changelog/2018-07-31-new-improvements-and-best-practices-for-account-security-and-recoverability/">preventing the use of compromised passwords</a>, and <a href="https://github.blog/2019-08-21-github-supports-webauthn-for-security-keys/">WebAuthn support</a>. These features make it more difficult for an attacker to take a password that’s been reused across multiple websites and use it to try to gain access to your GitHub account. Despite these improvements, for historical reasons customers without two-factor authentication enabled have been able to continue to authenticate Git and API operations using only their GitHub username and password.</p></blockquote>
+<p>Beginning August 13, 2021, we will no longer accept account passwords when authenticating Git operations and will require the use of token-based authentication, <a href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/set-up-git#next-steps-authenticating-with-github-from-git">such as a personal access token</a> (for developers) or an OAuth or GitHub App installation token (for integrators) for all authenticated Git operations on GitHub.com. You may also continue using SSH keys where you prefer.</p>
+<p>Tokens offer <a href="https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/#background">a number of security benefits</a> over password-based authentication:</p>
+<blockquote>
+<ol>
+<li><b>Unique</b> – tokens are specific to GitHub and can be generated per use or per device</li>
+<li><b>Revocable</b> – tokens can can be individually revoked at any time without needing to update unaffected credentials</li>
+<li><b>Limited</b> – tokens can be narrowly scoped to allow only the access necessary for the use case</li>
+<li><b>Random</b> – tokens are not subject to the types of dictionary or brute force attempts that simpler passwords that you need to remember or enter regularly might be</li>
+</ol>
+</blockquote>
+<h3 id="what-you-need-to-do-today">What you need to do today<a href="#what-you-need-to-do-today" class="heading-link" aria-label="What you need to do today" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<ul>
+<li>For developers, if you are using a password to authenticate Git operations with GitHub.com today, you must begin using <a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token">a personal access token</a> over HTTPS (recommended) or SSH key by August 13, 2021, to avoid disruption. If you receive a warning that you are using an outdated third-party integration, you should update your client to the latest version.</li>
+<li>For integrators, you must authenticate integrations using the web or <a href="https://github.blog/changelog/2020-07-27-oauth-2-0-device-authorization-flow/">device authorization</a> flows by August 13, 2021, to avoid disruption. For more information, see <a href="https://docs.github.com/en/developers/apps/authorizing-oauth-apps">Authorizing OAuth Apps</a> and <a href="https://developer.github.com/changes/2020-02-14-deprecating-password-auth/">the announcement on the developer blog</a>.</li>
+</ul>
+<h3 id="enabling-two-factor-authentication">Enabling two-factor authentication<a href="#enabling-two-factor-authentication" class="heading-link" aria-label="Enabling two-factor authentication" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<p>If you would like to ensure that your account does not allow password-based authentication, you can <a href="https://help.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication">enable two-factor authentication</a> for your account today. This will require you to use a personal access token for all authenticated operations via Git and third-party integrations.</p>
+<h3 id="brownouts">Brownouts<a href="#brownouts" class="heading-link" aria-label="Brownouts" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<p>To ensure all affected customers are aware of the authentication change, during two scheduled brownouts, we will temporarily disable support for password authentication, and Git operations made using a password will temporarily fail. The brownouts are scheduled for the following dates and times:</p>
+<h4 id="june-30-2021">June 30, 2021<a href="#june-30-2021" class="heading-link" aria-label="June 30, 2021" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h4>
+<ul>
+<li><a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Git+password+authentication+brownout&amp;iso=20210630T07&amp;p1=1440&amp;ah=3">From 7:00 AM UTC &#8211; 10:00 AM UTC</a></li>
+<li><a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Git+password+authentication+brownout&amp;iso=20210630T16&amp;p1=1440&amp;ah=3">From 4:00 PM UTC &#8211; 7:00 PM UTC</a></li>
+</ul>
+<h4 id="july-28-2021">July 28, 2021<a href="#july-28-2021" class="heading-link" aria-label="July 28, 2021" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h4>
+<ul>
+<li><a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Git+password+authentication+brownout&amp;iso=20210728T07&amp;p1=1440&amp;ah=3">From 7:00 AM UTC &#8211; 10:00 AM UTC</a></li>
+<li><a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Git+password+authentication+brownout&amp;iso=20210728T16&amp;p1=1440&amp;ah=3">From 4:00 PM UTC &#8211; 7:00 PM UTC</a></li>
+</ul>
+<h3 id="timeline">Timeline<a href="#timeline" class="heading-link" aria-label="Timeline" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a></h3>
+<ul>
+<li><b>Today</b> – If you are using passwords to authenticate Git operations with GitHub.com today, you will soon receive an email urging you to update your authentication method or third-party client.</li>
+<li><b>June 30 and July 28, 2021</b> – Token (or SSH key) authentication will be temporarily required for all Git operations to encourage affected customers to update their authentication method (see below).</li>
+<li><b>August 13, 2021</b> – Token (or SSH key) authentication will be required for all authenticated Git operations.</li>
+</ul>
+<p>If you have any questions, please see <a href="https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/">the related API password authentication blog post</a>, <a href="https://help.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure">learn more about keeping your account secure</a>, or <a href="https://support.github.com/contact">contact GitHub Support</a>. Need a security key? Head over to the <a href="https://thegithubshop.com/products/github-branded-yubikey" rel="noopener" target="_blank">GitHub Shop</a>.</p>
+
+	<div class="post__content post_tags_row gh_term_row col-12 col-md-10 mb-2">
+	<p>
+		<strong>Tags: </strong>
+		<a href="https://github.blog/tag/authentication/" rel="tag">authentication</a> <a href="https://github.blog/tag/git/" rel="tag">Git</a> <a href="https://github.blog/tag/token-authentication/" rel="tag">token authentication</a>	</p>
+</div>
+
+	<div class="post__social-share pt-5 pt-md-0">
+	<div class="social-links">
+
+		<strong class="section-label f3 alt-mono-font text-gray d-inline-block mb-2 mb-lg-4 underline-dash">
+			Share		</strong>
+
+		<ul class="social-links__list d-flex flex-row flex-lg-column">
+			<li class="social-links__item">
+				<a href="https://twitter.com/share?text=Token authentication requirements for Git operations&url=https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/" target="_blank" rel="noopener noreferrer" class="social-links__link">
+					<svg role="img" height="16" width="16" class="icon-twitter icon" aria-label="twitter"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-twitter"/></svg>
+				<span class="social-links__text f5">
+					Twitter					<span class="screen-reader-text">
+						Share on Twitter					</span>
+				</span>
+				</a>
+			</li>
+
+			<li class="social-links__item">
+				<a href="https://www.facebook.com/sharer/sharer.php?u=https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/&t=Token%20authentication%20requirements%20for%20Git%20operations" target="_blank" rel="noopener noreferrer" class="social-links__link">
+					<svg role="img" height="16" width="16" class="icon-facebook icon" aria-label="facebook"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-facebook"/></svg>					<span class="social-links__text f5">
+					Facebook						<span class="screen-reader-text">
+						Share on Facebook					</span>
+				</span>
+				</a>
+			</li>
+
+			<li class="social-links__item mb-2 mr-2">
+				<a
+					href="https://www.linkedin.com/shareArticle?url=https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/&title=Token%20authentication%20requirements%20for%20Git%20operations"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="social-links__link">
+					<svg role="img" height="16" width="16" class="icon-linkedin icon" aria-label="linkedin"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-linkedin"/></svg>					<span class="social-links__text f5">
+					LinkedIn						<span class="screen-reader-text">
+						Share on LinkedIn					</span>
+				</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+</div>
+
+				</article>
+
+			</div>
+
+		
+	</section>
+
+	<section class="related-posts px-3 py-6 py-md-9 bg-gray-light">
+
+	<div class="container-xl">
+		<strong class="section-label f3 alt-mono-font text-gray d-inline-block mb-4 underline-dash">
+			Related posts		</strong>
+	</div>
+
+	<div class="container-xl d-flex flex-column flex-md-row mt-4">
+
+		<div class="related-posts__post col-12 col-md-4 px-3 pl-md-0 pr-md-5">
+<article class="post-item d-flex flex-column flex-lg-row mb-8 px-sm-0">
+
+	<div class="post-item__content col-12 col-lg-6">
+
+		<div class="post__meta d-flex flex-column flex-lg-row flex-lg-items-center f4">
+			<p class="post__date m-0 alt-mono-font">
+				<time datetime="2021-08-16" pubdate>
+					August 16, 2021				</time>
+			</p>
+
+			<span class="spacer-line"></span>
+
+			<div class="post__categories flex-auto">
+				<a class="alt-mono-font" href="https://github.blog/category/community/">Community</a>			</div>
+		</div>
+
+		<h4 class="post-item__title f3 mb-4">
+			<a href="https://github.blog/2021-08-16-securing-your-github-account-two-factor-authentication/">
+				Securing your GitHub account with two-factor authentication			</a>
+		</h4>
+
+		<div class="post-item__excerpt mb-3">
+			<p>The benefits of multifactor authentication are widely documented, and there are a number of options for using 2FA on GitHub.</p>
+		</div>
+
+		<a href="https://github.blog/author/mph4/" class="author-block d-inline-flex flex-row flex-items-center">
+	<div class="author-block__pic mr-3">
+		<img alt='Image of Mike Hanley' src='https://avatars.githubusercontent.com/u/16546317?v=4&#038;s=35' srcset='https://avatars.githubusercontent.com/u/16546317?v=4&#038;s=70 2x' class='avatar avatar-35 photo avatar-default' height='35' width='35' itemprop="image" />	</div>
+	<p class="hero-post__author-name f5 m-0">
+		Mike Hanley	</p>
+</a>
+
+	</div>
+
+</article>
+</div><div class="related-posts__post col-12 col-md-4 px-3 pl-md-0 pr-md-5">
+<article class="post-item d-flex flex-column flex-lg-row mb-8 px-sm-0">
+
+	<div class="post-item__content col-12 col-lg-6">
+
+		<div class="post__meta d-flex flex-column flex-lg-row flex-lg-items-center f4">
+			<p class="post__date m-0 alt-mono-font">
+				<time datetime="2021-07-22" pubdate>
+					July 22, 2021				</time>
+			</p>
+
+			<span class="spacer-line"></span>
+
+			<div class="post__categories flex-auto">
+				<a class="alt-mono-font" href="https://github.blog/category/security/">Security</a>			</div>
+		</div>
+
+		<h4 class="post-item__title f3 mb-4">
+			<a href="https://github.blog/2021-07-22-github-supply-chain-security-features-go-community/">
+				GitHub brings supply chain security features to the Go community			</a>
+		</h4>
+
+		<div class="post-item__excerpt mb-3">
+			<p>GitHub’s supply chain security features are now available for Go modules, which will help the Go community discover, report, and prevent security vulnerabilities.</p>
+		</div>
+
+		<a href="https://github.blog/author/iamwillbar/" class="author-block d-inline-flex flex-row flex-items-center">
+	<div class="author-block__pic mr-3">
+		<img alt='Image of William Bartholomew' src='https://avatars3.githubusercontent.com/u/3266447?v=4&#038;s=35' srcset='https://avatars3.githubusercontent.com/u/3266447?v=4&#038;s=70 2x' class='avatar avatar-35 photo avatar-default' height='35' width='35' itemprop="image" />	</div>
+	<p class="hero-post__author-name f5 m-0">
+		William Bartholomew	</p>
+</a>
+
+	</div>
+
+</article>
+</div><div class="related-posts__post col-12 col-md-4 px-3 pl-md-0 pr-md-5">
+<article class="post-item d-flex flex-column flex-lg-row mb-8 px-sm-0">
+
+	<div class="post-item__content col-12 col-lg-6">
+
+		<div class="post__meta d-flex flex-column flex-lg-row flex-lg-items-center f4">
+			<p class="post__date m-0 alt-mono-font">
+				<time datetime="2021-06-25" pubdate>
+					June 25, 2021				</time>
+			</p>
+
+			<span class="spacer-line"></span>
+
+			<div class="post__categories flex-auto">
+				<a class="alt-mono-font" href="https://github.blog/category/security/">Security</a>			</div>
+		</div>
+
+		<h4 class="post-item__title f3 mb-4">
+			<a href="https://github.blog/2021-06-25-seven-years-github-security-bug-bounty-program/">
+				Seven years of the GitHub Security Bug Bounty program			</a>
+		</h4>
+
+		<div class="post-item__excerpt mb-3">
+			<p>GitHub’s bug bounty program is now a mature component of how we improve product security. We&#8217;re excited to highlight some achievements (and interesting vulnerabilities)!</p>
+		</div>
+
+		<a href="https://github.blog/author/gregose/" class="author-block d-inline-flex flex-row flex-items-center">
+	<div class="author-block__pic mr-3">
+		<img alt='Image of Greg Ose' src='https://avatars0.githubusercontent.com/u/427255?v=4&#038;s=35' srcset='https://avatars0.githubusercontent.com/u/427255?v=4&#038;s=70 2x' class='avatar avatar-35 photo avatar-default' height='35' width='35' itemprop="image" />	</div>
+	<p class="hero-post__author-name f5 m-0">
+		Greg Ose	</p>
+</a>
+
+	</div>
+
+</article>
+</div>
+	</div>
+
+</section>
+
+
+	
+	</main><!--/.site-main-->
+
+	<footer class="site-footer mt-6" id="footer" role="contentinfo">
+
+		<div class="container-lg p-responsive">
+			<div class="d-flex flex-wrap py-5 mb-5">
+				<div class="col-12 col-lg-4 mb-5">
+					<a href="https://github.blog" class="text-gray-dark" aria-label="Go to GitHub homepage">
+						<svg role="img" height="30" width="84" class="icon-logo-github icon" aria-label="logo-github"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-logo-github"/></svg>					</a>
+				</div>
+				<div class="col-6 col-sm-3 col-lg-2 mb-6 mb-md-2 pr-3 pr-lg-0 pl-lg-4"><h2 class="h5 mb-3 text-mono text-gray-light text-normal">Product</h2><ul class="list-style-none text-gray f5"><li class="lh-condensed mb-3"><a href="https://github.com/features" class="link-gray">Features</a></li><li class="lh-condensed mb-3"><a href="https://github.com/security" class="link-gray">Security</a></li><li class="lh-condensed mb-3"><a href="https://github.com/enterprise" class="link-gray">Enterprise</a></li><li class="lh-condensed mb-3"><a href="https://github.com/customer-stories?type=enterprise" class="link-gray">Customer Stories</a></li><li class="lh-condensed mb-3"><a href="https://github.com/pricing" class="link-gray">Pricing</a></li><li class="lh-condensed mb-3"><a href="https://resources.github.com/" class="link-gray">Resources</a></li></ul></div><div class="col-6 col-sm-3 col-lg-2 mb-6 mb-md-2 pr-3 pr-md-0 pl-md-4"><h2 class="h5 mb-3 text-mono text-gray-light text-normal">Platform</h2><ul class="list-style-none text-gray f5"><li class="lh-condensed mb-3"><a href="https://developer.github.com/" class="link-gray">Developer API</a></li><li class="lh-condensed mb-3"><a href="https://partner.github.com/" class="link-gray">Partners</a></li><li class="lh-condensed mb-3"><a href="https://atom.io/" class="link-gray">Atom</a></li><li class="lh-condensed mb-3"><a href="https://www.electronjs.org/" class="link-gray">Electron</a></li><li class="lh-condensed mb-3"><a href="https://desktop.github.com/" class="link-gray">GitHub Desktop</a></li></ul></div><div class="col-6 col-sm-3 col-lg-2 mb-6 mb-md-2 pr-3 pr-md-0 pl-md-4"><h2 class="h5 mb-3 text-mono text-gray-light text-normal">Support</h2><ul class="list-style-none text-gray f5"><li class="lh-condensed mb-3"><a href="https://docs.github.com/" class="link-gray">Docs</a></li><li class="lh-condensed mb-3"><a href="https://github.community/" class="link-gray">Community Forum</a></li><li class="lh-condensed mb-3"><a href="https://services.github.com/" class="link-gray">Training</a></li><li class="lh-condensed mb-3"><a href="https://www.githubstatus.com/" class="link-gray">Status</a></li><li class="lh-condensed mb-3"><a href="https://support.github.com/" class="link-gray">Contact</a></li></ul></div><div class="col-6 col-sm-3 col-lg-2 mb-6 mb-md-2 pr-3 pr-md-0 pl-md-4"><h2 class="h5 mb-3 text-mono text-gray-light text-normal">Company</h2><ul class="list-style-none text-gray f5"><li class="lh-condensed mb-3"><a href="https://github.com/about" class="link-gray">About</a></li><li class="lh-condensed mb-3"><a href="https://github.blog/" class="link-gray">Blog</a></li><li class="lh-condensed mb-3"><a href="https://github.com/about/careers" class="link-gray">Careers</a></li><li class="lh-condensed mb-3"><a href="https://github.com/about/press" class="link-gray">Press</a></li><li class="lh-condensed mb-3"><a href="https://shop.github.com/" class="link-gray">Shop</a></li></ul></div>			</div>
+		</div>
+		<div class="bg-gray-light">
+			<div class="container-lg p-responsive f6 py-4 d-sm-flex flex-justify-between flex-row-reverse flex-items-center">
+				<ul class="list-style-none d-flex flex-items-center mb-3 mb-sm-0 lh-condensed-ultra site-footer__social-list">
+					<li class="mr-3">
+						<a href="https://twitter.com/github">
+							<svg role="img" height="18" width="22" class="icon-twitter icon" aria-label="twitter"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-twitter"/></svg>							<span class="screen-reader-text">Github Twitter link</span>
+						</a>
+					</li>
+					<li class="mr-3">
+						<a href="https://www.facebook.com/GitHub">
+							<svg role="img" height="18" width="22" class="icon-facebook icon" aria-label="facebook"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-facebook"/></svg>							<span class="screen-reader-text">Github Facebook link</span>
+						</a>
+					</li>
+					<li class="mr-3">
+						<a href="https://www.youtube.com/github">
+							<svg role="img" height="18" width="22" class="icon-youtube icon" aria-label="youtube"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-youtube"/></svg>							<span class="screen-reader-text">Github Youtube link</span>
+						</a>
+					</li>
+					<li class="mr-3 flex-self-start">
+						<a href="https://www.linkedin.com/company/github">
+							<svg role="img" height="18" width="22" class="icon-linkedin icon" aria-label="linkedin"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-linkedin"/></svg>							<span class="screen-reader-text">Github LinkedIn link</span>
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/github" >
+							<svg role="img" height="20" width="20" class="icon-mark-github icon" aria-label="mark-github"><use xlink:href="https://github.blog/wp-content/themes/github-blog/dist/icons/icons.svg#icon-mark-github"/></svg>							<span class="screen-reader-text">Github link</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="list-style-none d-flex text-gray">
+					<li class="mr-3">
+						© 2021 GitHub, Inc.					</li>
+					<li class="mr-3">
+						<a href="https://docs.github.com/en/github/site-policy/github-terms-of-service" class="link-gray">
+							Terms						</a>
+					</li>
+					<li>
+						<a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" class="link-gray">
+							Privacy						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+</footer><!--/.site-footer-->
+
+	<script type='text/javascript' src='https://github.blog/_static/??-eJyNzc0OgjAQBOAXsixIUrwYH8XQH8piu23YLca3Fw0Hj57mMvMNPIuymcSTQKqqxBqQGBYvZbQP1bVNC3ckC6ZidFDmLJmOaBJSs/AJfgyZffIMAWWuRpmYA4zMXnaSYfPk8gq8BYX7QJUcXxPG+AfikOVDTOu3447vW7p2+jzovr3oYXkDhVVKsQ=='></script>
+<script src='https://github.blog/wp-content/themes/github-blog/dist/js/vendor/collector-api.min.js?ver=0.2.1' id='octolytics-collector-js'></script>
+<script src='https://github.blog/wp-content/themes/github-blog/dist/js/vendor/octolytics.js?ver=0.2.1' id='octolytics-recorder-js'></script>
+<script type='text/javascript' src='https://github.blog/wp-includes/js/wp-embed.min.js?m=1629145603g'></script>
+<script src='https://stats.wp.com/e-202133.js' defer></script>
+<script>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:10.0',blog:'153214340',post:'55352',tz:'-7',srv:'github.blog'} ]);
+	_stq.push([ 'clickTrackerInit', '153214340', '55352' ]);
+</script>
+	</body>
+</html>
